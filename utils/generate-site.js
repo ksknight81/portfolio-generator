@@ -1,40 +1,37 @@
-const fs = require("fs");
+const fs = require('fs');
 
-const writeFile = (fileContent) => {
+// writing files
+const writeFile = fileContent => {
   return new Promise((resolve, reject) => {
-    fs.writeFile("./dist/index.htms", fileContent, (err) => {
-      // if there is an error, reject the Promise and send the error to the promis's '.catch()' method
+    fs.writeFile('./dist/index.html', fileContent, err => {
       if (err) {
         reject(err);
-        //return out of the function here to make sure the Promise doenst accidentally execute the resolve() function as well
         return;
       }
 
-      // if everything went well, resolve the Promise and send the successful data tot he '.then()' method
       resolve({
         ok: true,
-        message: "File created!",
+        message: 'File created!'
       });
     });
   });
 };
 
-const copyFile = (fileContent) => {
+// copying file
+const copyFile = () => {
   return new Promise((resolve, reject) => {
-    fs.copyFile("./dist/style.css", fileContent, (err) => {
+    fs.copyFile('./src/style.css', './dist/style.css', err => {
       if (err) {
         reject(err);
-        return fs.copyFile();
+        return;
       }
+
       resolve({
         ok: true,
-        message: "File Copied",
+        message: 'Stylesheet created!'
       });
     });
   });
 };
 
-module.exports = {
-    writeFile: writeFile,
-    copyFile: copyFile
-};
+module.exports = { writeFile, copyFile };

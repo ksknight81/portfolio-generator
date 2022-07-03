@@ -1,8 +1,6 @@
-const { writeFile, copyFile } = require('./utils/generate-site.js');
-
 const inquirer = require('inquirer');
-const { retryWhen } = require('rxjs');
 const generatePage = require('./src/page-template');
+const { writeFile, copyFile } = require('./utils/generate-site');
 
 const promptUser = () => {
   return inquirer.prompt([
@@ -13,7 +11,7 @@ const promptUser = () => {
       validate: nameInput => {
         if (nameInput) {
           return true;
-        } else { 
+        } else {
           console.log('Please enter your name!');
           return false;
         }
@@ -127,28 +125,6 @@ Add a New Project
       }
     });
 };
-
-// promptUser()
-//   .then(promptProject)
-//   .then(portfolioData => {
-//     const pageHTML = generatePage(portfolioData);
-
-//     fs.writeFile('./dist/index.html', pageHTML, err => {
-//       if (err) {
-//         console.log(err);
-//         return;
-//       }
-//       console.log('Page created! Check out index.html in this directory to see it!');
-
-//       fs.copyFile('./src/style.css', './dist/style.css', err => {
-//         if (err) {
-//           console.log(err);
-//           return;
-//         }
-//         console.log('Style sheet copied successfully!');
-//       });
-//     });
-//   });
 
 promptUser()
   .then(promptProject)
